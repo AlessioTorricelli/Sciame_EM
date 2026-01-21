@@ -1,0 +1,195 @@
+'''
+Modulo plot_sciame.py
+
+Contiene le funzioni per visualizzare i grafici del profilo longitudinale dello sciame e dei suoi parametri
+
+
+'''
+
+
+import numpy as np
+import analisi_sciame as an
+import matplotlib.pyplot as plt
+
+def visualizza_profilo(E_min, E_max, ec_elettrone, ec_positrone, dE_X0, s, tipo, n):
+	
+	"""
+	Genera tre grafici in colonna riportando in funzione della distanza in unità di X0:
+	- Numero di particelle presenti ad ogni passo per 3 valori di enegia inizale
+	- Energia persa per ionizzazione an ogni passo per 3 valori di enegia inizale
+	- Energia cumulata persa per ionizzazione ad ogni passo per 3 valori di enegia inizale
+	I tre valori di energia sono E_min, E_max e il valore centrale tra questi due
+	
+	Parametri:
+		E_min (float): valore minimo di energia per cui vengono eseguite le simulazioni [MeV]
+		E_max (float): valore massimo di energia per cui vengono eseguite le simulazioni [MeV]
+		ec_elettrone (float): energia critica per gli elettroni nel materiale in esame [MeV]
+		ec_positrone (float): energia critica per i positroni nel materiale in esame [MeV]
+		dE_X0 (float): perdita per ionizzazione in una lunghezza di radiazione [MeV/cm]
+		s (float): passo di avanzamento della simulazione in frazioni di X0 (s in (0, 1])
+		tipo (str): tipo della particella iniziale (elettrone, positrone, fotone)
+		n (int): numero di simulazioni da eseguire
+		
+	Ritorna:
+		None
+	"""
+	
+	if E_min < 0 or E_max < 0:
+		raise ValueError("L'energia minima e massima devono essere entrambe positive")
+	
+	E0 = np.linspace(E_min, E_max, 3)
+	
+	fig, ax = plt.subplots(3,1, figsize = (12,9), sharex = True)
+	fig.suptitle( f"Profilo medio di {n} sciami a diversi valori di energia", fontsize=16)
+	
+	color = ['salmon', 'mediumseagreen', 'cornflowerblue']
+	for i, e in enumerate(E0):
+		
+		risultati = an.profilo_medio(e, ec_elettrone, ec_positrone, dE_X0, s, tipo, n)
+		
+		ax[0].errorbar(risultati['passi'], risultati['n_med'], risultati['n_err'], label = f'$E_0$ = {e:.0f} MeV', marker = '.', color = color[i])
+		ax[1].errorbar(risultati['passi'], risultati['E_med'], risultati['E_err'], label = f'$E_0$ = {e:.0f} MeV', marker = '.', color = color[i])
+		ax[2].errorbar(risultati['passi'], risultati['E_cum_med'], risultati['E_cum_err'], label = f'$E_0$ = {e:.0f} MeV', marker = '.', color = color[i])
+		
+
+	titoli = ['Numero medio di particelle per passo',
+			  'Energia media persa per ogni passo',
+			  'Energia cumulativa media persa a ogni passo']
+	y_label = [r'$\bar{N}$',
+			   r'$\overline{\Delta E}$ [MeV]',
+			   r'$\bar{E}$ [MeV]']
+
+	for i in range(3):
+		ax[i].set_title(titoli[i], fontsize = 14)
+		ax[i].grid(True, linestyle = '--', alpha = 0.5, color = 'gray')
+		ax[i].set_ylabel(y_label[i], fontsize = 14)
+		ax[i].legend(fontsize = 12, loc = 'upper left')
+	
+	ax[2].set_xlabel(r'distanza [$X_0$]', fontsize = 14)
+	fig.subplots_adjust(hspace=0.4)	
+
+	plt.show()
+	
+	
+	
+def confronto_materiali(Energie, risultati):
+	"""
+	Genera due pannelli con due grafici ciascuno in funzione dell'enegia E0 della particella iniziale.
+	In ogni grafico sono presenti i dati relativi ai vari materiali in esame.
+	-Pannello1: Energia totale depositata e numero massimo medio di particelle
+	-pannello2: Distanza massima media raggiunta e posizione media del massimo
+	
+	Parametri:
+		Energie (np.array): Energie usate per eseguire le simulazioni
+		risultati (dict): Ogni chiave è il nome del materiale (str) e il valore è un dict contenente:
+				-'En' (list): energia totale media depositata per ionizzazione per ogni valore di energia [MeV]
+				-'En_err' (list): errore standard dell'energia totale media depositata [MeV]
+				-'n_max' (list): numero massimo medio di particelle presenti nello sciame per ogi valore di energia
+				-'n_max_err' (list): errore standard del numero massimo medio di particelle
+				-'dist_max' (list): distanza massima raggiunta in media dallo sciame per ogni valore di energia [cm]
+				-'dist_max_err' (list): errore standard della distanza massima raggiunta
+				-'massimo' (list): distanza media alla quale si ha il numero massimo di particelle per ogni valore di energua [cm]
+				-'massimo_err' (list): errore standard della distanza media alla quale si ha il numero massimo di particelle
+				-'color' (str): nome del colore da utilizzare per rappresentare nei grafici il materiale
+		Ritorna:
+			None
+	"""
+	
+	titoli = ['Energia totale media depositata', 'Numero massimo medio di particelle',
+			  'Distanza massima media raggiunta', 'Posizione media del massimo']
+	ylabel = [r'$\overline{E}_{ion}$ [Mev]', r'$\overline{N}$',
+			  r'$\overline{d}_{max}$ [cm]', r'$\overline{d}$ [cm]']	
+	
+	fig1, ax1 = plt.subplots(2,1, figsize  = (13, 8), sharex = True)
+	fig2, ax2 = plt.subplots(2,1, figsize  = (13, 8), sharex = True)
+	
+	fig1.suptitle( r"Andamento medio dei parametri dello sciame ($\overline{E}_{ion}$ e $\overline{N}$)", fontsize=16)
+	fig2.suptitle( r"Andamento medio dei parametri dello sciame ($\overline{d}_{max}$ e $\overline{d}$)", fontsize=16)
+	
+	for materiale in risultati:
+		
+		ax1[0].errorbar(Energie, risultati[materiale]['En']/Energie, risultati[materiale]['En_err']/Energie, fmt = '.', label = materiale ,color = risultati[materiale]['color'])
+		ax1[1].errorbar(Energie, risultati[materiale]['n_max'], risultati[materiale]['n_max_err'], fmt = '.', label = materiale, color = risultati[materiale]['color'])
+		ax2[0].errorbar(Energie, risultati[materiale]['dist_max'], risultati[materiale]['dist_max_err'], fmt = '.', label = materiale, color = risultati[materiale]['color'])
+		ax2[1].errorbar(Energie, risultati[materiale]['massimo'], risultati[materiale]['massimo_err'], fmt = '.', label = materiale, color = risultati[materiale]['color'])	
+			
+	for i in range(0,2):
+			
+		ax1[i].set_title(titoli[i], fontsize = 14)
+		ax1[i].set_ylabel(ylabel[i], fontsize = 14)
+		ax1[i].grid(True, linestyle = '--', alpha = 0.5, color = 'gray')
+		ax1[i].set_xscale('log')
+		ax1[i].legend(fontsize = 14)
+			
+		ax2[i].set_title(titoli[i+2], fontsize = 14)
+		ax2[i].set_ylabel(ylabel[i+2], fontsize = 14)
+		ax2[i].grid(True, linestyle = '--', alpha = 0.5, color = 'gray')
+		ax2[i].set_xscale('log')
+		ax2[i].legend(fontsize = 14)
+		
+	ax1[1].set_xlabel(r'$E_0$ [MeV]', fontsize = 14)
+	ax2[1].set_xlabel(r'$E_0$ [MeV]', fontsize = 14)	
+	
+	plt.show()
+		
+	
+
+def singoli_materiali(Energie, risultati):
+	
+	"""
+	Genera due pannelli per ogni materiale con due grafici ciascuno in funzione dell'enegia E0 della particella iniziale.
+	
+	Parametri:
+		Energie (np.array): Energie usate per eseguire le simulazioni
+		risultati (dict): Ogni chiave è il nome del materiale (str) e il valore è un dict contenente:
+				-'En' (list): energia totale media depositata per ionizzazione per ogni valore di energia [MeV]
+				-'En_err' (list): errore standard dell'energia totale media depositata [MeV]
+				-'n_max' (list): numero massimo medio di particelle presenti nello sciame per ogi valore di energia
+				-'n_max_err' (list): errore standard del numero massimo medio di particelle
+				-'dist_max' (list): distanza massima raggiunta in media dallo sciame per ogni valore di energia [cm]
+				-'dist_max_err' (list): errore standard della distanza massima raggiunta
+				-'massimo' (list): distanza media alla quale si ha il numero massimo di particelle per ogni valore di energua [cm]
+				-'massimo_err' (list): errore standard della distanza media alla quale si ha il numero massimo di particelle
+				-'color' (str): nome del colore da utilizzare per rappresentare nei grafici il materiale
+		Ritorna:
+			None
+	"""
+	
+	titoli = ['Energia totale media depositata per ionizzazione', 'Numero massimo di particelle nello sciame',
+			  'Distanza massima raggiunta dallo sciame', 'Distanza dove si trova il massimo']
+	ylabel = [r'$\overline{E}_{ion}$ [Mev]', r'$\overline{N}$',
+			  r'$\overline{d}_{max}$ [cm]', r'$\overline{d} [cm]$']	
+	
+	for materiale in risultati:
+		
+		fig1, ax1 = plt.subplots(2,1, figsize  = (13, 8), sharex = True)
+		fig2, ax2 = plt.subplots(2,1, figsize  = (13, 8), sharex = True)
+		fig1.suptitle(f'Andamento medio dei parametri dello sciame in "{materiale}"', fontsize=16)
+		fig2.suptitle(f'Andamento medio dei parametri dello sciame in "{materiale}"', fontsize=16)
+		
+		ax1[0].errorbar(Energie, risultati[materiale]['En']/Energie, risultati[materiale]['En_err']/Energie, fmt = '.', label = materiale ,color = risultati[materiale]['color'])
+		ax1[1].errorbar(Energie, risultati[materiale]['n_max'], risultati[materiale]['n_max_err'], fmt = '.', label = materiale, color = risultati[materiale]['color'])
+		ax2[0].errorbar(Energie, risultati[materiale]['dist_max'], risultati[materiale]['dist_max_err'], fmt = '.', label = materiale, color = risultati[materiale]['color'])
+		ax2[1].errorbar(Energie, risultati[materiale]['massimo'], risultati[materiale]['massimo_err'], fmt = '.', label = materiale, color = risultati[materiale]['color'])	
+				
+		for i in range(2):
+				
+			ax1[i].legend(fontsize = 14)
+			ax1[i].set_title(titoli[i], fontsize = 14)
+			ax1[i].set_ylabel(ylabel[i], fontsize = 14)
+			ax1[i].grid(True)
+			ax1[i].set_xscale('log')
+			
+			ax2[i].legend(fontsize = 14)
+			ax2[i].set_title(titoli[i+2], fontsize = 14)
+			ax2[i].set_ylabel(ylabel[i+2], fontsize = 14)
+			ax2[i].grid(True)
+			ax2[i].set_xscale('log')
+		
+		ax1[1].set_xlabel(r'$E_0$ [MeV]', fontsize = 14)
+		ax2[1].set_xlabel(r'$E_0$ [MeV]', fontsize = 14)
+		
+		plt.show()	
+
+
+
