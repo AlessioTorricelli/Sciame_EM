@@ -47,9 +47,9 @@ def visualizza_profilo(E_min, E_max, ec_elettrone, ec_positrone, dE_X0, s, tipo,
 		
 		risultati = an.profilo_medio(e, ec_elettrone, ec_positrone, dE_X0, s, tipo, n)
 		
-		ax[0].errorbar(risultati['passi'], risultati['n_med'], risultati['n_err'], label = f'$E_0$ = {e:.0f} MeV', marker = '.', color = color[i])
-		ax[1].errorbar(risultati['passi'], risultati['E_med'], risultati['E_err'], label = f'$E_0$ = {e:.0f} MeV', marker = '.', color = color[i])
-		ax[2].errorbar(risultati['passi'], risultati['E_cum_med'], risultati['E_cum_err'], label = f'$E_0$ = {e:.0f} MeV', marker = '.', color = color[i])
+		ax[0].errorbar(risultati['distanza'], risultati['n_med'], risultati['n_err'], label = f'$E_0$ = {e:.0f} MeV', marker = '.', color = color[i])
+		ax[1].errorbar(risultati['distanza'], risultati['E_med'], risultati['E_err'], label = f'$E_0$ = {e:.0f} MeV', marker = '.', color = color[i])
+		ax[2].errorbar(risultati['distanza'], risultati['E_cum_med'], risultati['E_cum_err'], label = f'$E_0$ = {e:.0f} MeV', marker = '.', color = color[i])
 		
 
 	titoli = ['Numero medio di particelle per passo',
