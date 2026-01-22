@@ -52,7 +52,7 @@ Parametri richiesti da riga di comando:
 * Numero di simulazioni per ogni valore di energia.
 
 **Esempio di utilizzo:**
-```bash
+```
 python3 run_profilo_sciame.py 2500 10000 13.37 12.94 4.785 0.1 positrone 100
 ```
 
@@ -80,6 +80,6 @@ Parametri richiesti da riga di comando:
 
 **Esempio di utilizzo:**
 ```
-bashpython3 run_analisi_materiali.py 30 10000 10 100 0.1 positrone
+python3 run_analisi_materiali.py 30 10000 10 100 0.1 positrone
 ```    
   
