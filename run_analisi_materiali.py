@@ -18,9 +18,6 @@ Parametri accettati (argparse):
     s (float): Passo di avanzamento in frazioni di X0 (s in (0,1])
     tipo (str): Tipo di particella iniziale (elettrone, positrone, fotone)
     --singoli (flag): Se presente, i grafici vengono mostrati singolarmente, non sovrapposti
-
-Esempio di utilizzo:
-    python3 run_analisi_materiali.py 30 10000 10 100 0.1 positrone --singoli
 """
 
 import argparse
