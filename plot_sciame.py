@@ -120,6 +120,8 @@ def confronto_materiali(Energie, risultati):
 		
 	ax1[1].set_xlabel(r'$E_0$ [MeV]', fontsize = 14)
 	ax2[1].set_xlabel(r'$E_0$ [MeV]', fontsize = 14)	
+
+	plt.tight_layout()
 	
 	plt.show()
 		
