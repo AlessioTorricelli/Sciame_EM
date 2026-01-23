@@ -111,8 +111,8 @@ def sciame_stat(E0_min, E0_max, materiali, s, tipo, nE, n):
 				-'color' (str): nome del colore da utilizzare per rappresentare nei grafici il materiale
 	"""
 	
-	if E0_min < 0 or E0_max > 0:
-		raise ValueError('Inserire valori di energia  positivo')
+	if E0_min < 0 or E0_max < 0:
+		raise ValueError('Inserire valori di energia positivi')
 		
 	if nE < 0 or n < 0:
 		raise ValueError("'nE' e 'n' devono essere entrambi positivi")
