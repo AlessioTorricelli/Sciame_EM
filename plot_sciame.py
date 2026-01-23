@@ -156,7 +156,7 @@ def singoli_materiali(Energie, risultati):
 		fig1, ax1 = plt.subplots(2,1, figsize  = (13, 8), sharex = True)
 		fig2, ax2 = plt.subplots(2,1, figsize  = (13, 8), sharex = True)
 		
-		fig1.suptitle(f'Frazione di $\mathbf{E_0}$ depositata e distanza raggiunta in "{materiale}"', fontsize=16)
+		fig1.suptitle(f'Frazione di $\mathbf{{E_0}}$ depositata e distanza raggiunta in "{materiale}"', fontsize=16)
 		fig2.suptitle(f'Numero massimo di particelle e posizione del massimo in "{materiale}"', fontsize=16)
 		
 		ax1[0].errorbar(Energie, risultati[materiale]['En']/Energie, risultati[materiale]['En_err']/Energie, fmt = '.', label = materiale ,color = risultati[materiale]['color'])
