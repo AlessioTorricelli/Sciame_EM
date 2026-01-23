@@ -95,7 +95,7 @@ def confronto_materiali(Energie, risultati):
 	titoli = ['Frazione di E0 depositata', 'Numero massimo di particelle',
 			  'Distanza raggiunta', 'Posizione del massimo']
 	ylabel = [r'$\overline{E}_{ion}/E_0$', r'$\overline{N}$',
-			  r'$\overline{d}_{max}$ [cm]', r'$\overline{d}$ [cm]']	
+			  r'$\overline{d}_{stop}$ [cm]', r'$\overline{d}_{max}$ [cm]']	
 	
 	fig1, ax1 = plt.subplots(2,1, figsize  = (13, 8), sharex = True)
 	fig2, ax2 = plt.subplots(2,1, figsize  = (13, 8), sharex = True)
