@@ -51,12 +51,12 @@ def profilo_medio(E0, ec_elettrone, ec_positrone, dE_X0, s, tipo, n):
 		for j in range(massimo):
 			if len(Energia[i]) > j:
 				mat_en[i][j] = Energia[i][j]
-				mat_part[i][j] = particelle[i][j]
+				mat_part[i][j] = n_particelle[i][j]
 
 	E_med = np.mean(mat_en, axis=0)
-	E_err = np.std(mat_en, axis=0)/np.sqrt(len(particelle))
+	E_err = np.std(mat_en, axis=0)/np.sqrt(n)
 	n_med = np.mean(mat_part, axis=0)
-	n_err = np.std(mat_part, axis=0)/np.sqrt(len(particelle))
+	n_err = np.std(mat_part, axis=0)/np.sqrt(n)
 
 	mat_en_cum = np.cumsum(mat_en, axis=1)
 	E_cum_med = np.mean(mat_en_cum, axis=0)
