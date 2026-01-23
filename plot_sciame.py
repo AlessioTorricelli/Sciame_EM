@@ -102,10 +102,10 @@ def confronto_materiali(Energie, risultati):
 	
 	for materiale in risultati:
 		
-		ax1[0].errorbar(Energie, risultati[materiale]['En']/Energie, risultati[materiale]['En_err']/Energie, fmt = '.', label = materiale ,color = risultati[materiale]['color'])
-		ax1[1].errorbar(Energie, risultati[materiale]['n_max'], risultati[materiale]['n_max_err'], fmt = '.', label = materiale, color = risultati[materiale]['color'])
-		ax2[0].errorbar(Energie, risultati[materiale]['dist_max'], risultati[materiale]['dist_max_err'], fmt = '.', label = materiale, color = risultati[materiale]['color'])
-		ax2[1].errorbar(Energie, risultati[materiale]['massimo'], risultati[materiale]['massimo_err'], fmt = '.', label = materiale, color = risultati[materiale]['color'])	
+		ax1[0].errorbar(Energie, risultati[materiale]['En']/Energie, risultati[materiale]['En_err']/Energie, fmt = '.', linestyle='-', label = materiale ,color = risultati[materiale]['color'])
+		ax1[1].errorbar(Energie, risultati[materiale]['n_max'], risultati[materiale]['n_max_err'], fmt = '.', linestyle='-', label = materiale, color = risultati[materiale]['color'])
+		ax2[0].errorbar(Energie, risultati[materiale]['dist_max'], risultati[materiale]['dist_max_err'], fmt = '.', linestyle='-', label = materiale, color = risultati[materiale]['color'])
+		ax2[1].errorbar(Energie, risultati[materiale]['massimo'], risultati[materiale]['massimo_err'], fmt = '.', linestyle='-', label = materiale, color = risultati[materiale]['color'])	
 			
 	for i in range(0,2):
 			
@@ -161,10 +161,10 @@ def singoli_materiali(Energie, risultati):
 		fig1.suptitle(f'Andamento medio dei parametri dello sciame in "{materiale}"', fontsize=16)
 		fig2.suptitle(f'Andamento medio dei parametri dello sciame in "{materiale}"', fontsize=16)
 		
-		ax1[0].errorbar(Energie, risultati[materiale]['En']/Energie, risultati[materiale]['En_err']/Energie, fmt = '.', label = materiale ,color = risultati[materiale]['color'])
-		ax1[1].errorbar(Energie, risultati[materiale]['n_max'], risultati[materiale]['n_max_err'], fmt = '.', label = materiale, color = risultati[materiale]['color'])
-		ax2[0].errorbar(Energie, risultati[materiale]['dist_max'], risultati[materiale]['dist_max_err'], fmt = '.', label = materiale, color = risultati[materiale]['color'])
-		ax2[1].errorbar(Energie, risultati[materiale]['massimo'], risultati[materiale]['massimo_err'], fmt = '.', label = materiale, color = risultati[materiale]['color'])	
+		ax1[0].errorbar(Energie, risultati[materiale]['En']/Energie, risultati[materiale]['En_err']/Energie, fmt = '.', linestyle='-', label = materiale ,color = risultati[materiale]['color'])
+		ax1[1].errorbar(Energie, risultati[materiale]['n_max'], risultati[materiale]['n_max_err'], fmt = '.', linestyle='-', label = materiale, color = risultati[materiale]['color'])
+		ax2[0].errorbar(Energie, risultati[materiale]['dist_max'], risultati[materiale]['dist_max_err'], fmt = '.',linestyle='-' , label = materiale, color = risultati[materiale]['color'])
+		ax2[1].errorbar(Energie, risultati[materiale]['massimo'], risultati[materiale]['massimo_err'], fmt = '.', linestyle='-', label = materiale, color = risultati[materiale]['color'])	
 				
 		for i in range(2):
 				
