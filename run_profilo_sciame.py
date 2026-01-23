@@ -9,17 +9,14 @@ Genera tre grafici in colonna riportando in funzione della distanza in unità di
 	I tre valori di energia sono E_min, E_max e il valore centrale tra questi due
 
 Parametri accettati (argparse):
-    E_min: Energia iniziale minima [MeV].
-    E_max: Energia iniziale massima [MeV].
-    ec_elettrone: Energia critica per elettroni [MeV].
-    ec_positrone: Energia critica per positroni [MeV].
-    dE_X0: Perdita per ionizzazione [MeV/X0].
+    E_min: Energia iniziale minima [MeV]
+    E_max: Energia iniziale massima [MeV]
+    ec_elettrone: Energia critica per elettroni [MeV]
+    ec_positrone: Energia critica per positroni [MeV]
+    dE_X0: Perdita per ionizzazione [MeV/cm]
     s: Passo di avanzamento in frazioni di X0 (s in (0,1])
-    tipo: Tipo di particella iniziale (elettrone, positrone, fotone).
-    n: Numero di simulazioni per ogni valore di energia.
-
-Esempio di utilizzo:
-    python3  run_profilo_sciame.py 2500 10000 13.37 12.94 4.785 0.1 positrone 100
+    tipo: Tipo di particella iniziale (elettrone, positrone, fotone)
+    n: Numero di simulazioni per ogni valore di energia
 """
 
 import argparse
