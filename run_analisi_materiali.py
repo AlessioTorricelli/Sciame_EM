@@ -8,7 +8,7 @@ Calcola i valori medi con relativi errori di:
 	Distanza massima raggiunta
 	Posizione del massimo
 	
-I dati ottenuti per ogni materiale possono essere rappresentati o sovrapposti o separatamente.
+I dati ottenuti per ogni materiale possono essere rappresentati sovrapposti o separatamente.
 
 Parametri accettati (argparse):
     E0_min (float): Energia iniziale minima dell'intervallo di simulazione [MeV]
@@ -44,5 +44,5 @@ Energie, risultati = an.sciame_stat(args.E0_min, args.E0_max, materiali, args.s,
 if args.singoli:
 	plot.confronto_materiali(Energie, risultati)
 
-if not args.singoli:
+else:
 	plot.singoli_materiali(Energie, risultati)
