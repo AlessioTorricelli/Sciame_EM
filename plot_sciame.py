@@ -167,12 +167,12 @@ def singoli_materiali(Energie, risultati):
 		for i in range(2):
 				
 			ax1[i].legend(fontsize = 14)
-			ax1[i].set_ylabel(ylabel[i], fontsize = 14, labelapad = 20)
+			ax1[i].set_ylabel(ylabel[i], fontsize = 14, labelpad = 20)
 			ax1[i].grid(True, linestyle = '--', alpha = 0.5, color = 'gray')
 			ax1[i].set_xscale('log')
 			
 			ax2[i].legend(fontsize = 14)
-			ax2[i].set_ylabel(ylabel[i+2], fontsize = 14, labelapad = 20)
+			ax2[i].set_ylabel(ylabel[i+2], fontsize = 14, labelpad = 20)
 			ax2[i].grid(True, linestyle = '--', alpha = 0.5, color = 'gray')
 			ax2[i].set_xscale('log')
 		
