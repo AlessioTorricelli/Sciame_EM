@@ -115,7 +115,7 @@ def sciame_stat(E0_min, E0_max, materiali, s, tipo, nE, n):
 		raise ValueError('Inserire valori di energia  positivo')
 		
 	if nE < 0 or n < 0:
-		raise ValueError('nE' e 'n' devono essere entrambi positivi')
+		raise ValueError("'nE' e 'n' devono essere entrambi positivi")
 		
 	risultati = {}
 	
