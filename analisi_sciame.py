@@ -46,7 +46,7 @@ def profilo_medio(E0, ec_elettrone, ec_positrone, dE_X0, s, tipo, n):
 		
 	massimo = max(len(p) for p in n_particelle)
 	mat_en = np.zeros(n, massimo)
-	mat_part = np.zeros(n, massimo))
+	mat_part = np.zeros(n, massimo)
 	for i in range(n):
 		for j in range(massimo):
 			if len(Energia[i]) > j:
