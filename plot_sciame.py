@@ -92,14 +92,13 @@ def confronto_materiali(Energie, risultati):
 			None
 	"""
 	
-	titoli = ['Frazione di E0 depositata', 'Distanza raggiunta', 'Numero massimo di particelle', 'Posizione del massimo']
 	ylabel = [r'$\overline{E}_{ion}/E_0$', r'$\overline{d}_{stop}$ [cm]', r'$\overline{N}$', r'$\overline{d}_{max}$ [cm]']	
 	
 	fig1, ax1 = plt.subplots(2,1, figsize  = (13, 8), sharex = True)
 	fig2, ax2 = plt.subplots(2,1, figsize  = (13, 8), sharex = True)
 
-	fig1.suptitle(r'Frazione di $E_0$ depositata e distanza raggiunta', fontweight='bold')
-	fig2.suptitle('Numero massimo di particelle e posizione del massimo', fontweight='bold')
+	fig1.suptitle(r'Frazione di $\mathbf{E_0}$ depositata e distanza raggiunta', fontweight='bold', fontsize = 16)
+	fig2.suptitle('Numero massimo di particelle e posizione del massimo', fontweight='bold', fontsize = 16)
 	for materiale in risultati:
 		
 		ax1[0].errorbar(Energie, risultati[materiale]['En']/Energie, risultati[materiale]['En_err']/Energie, fmt = '.', label = materiale ,color = risultati[materiale]['color'])
@@ -109,13 +108,11 @@ def confronto_materiali(Energie, risultati):
 			
 	for i in range(0,2):
 			
-		ax1[i].set_title(titoli[i], fontsize = 14)
 		ax1[i].set_ylabel(ylabel[i], fontsize = 14)
 		ax1[i].grid(True, linestyle = '--', alpha = 0.5, color = 'gray')
 		ax1[i].set_xscale('log')
 		ax1[i].legend(fontsize = 14)
-			
-		ax2[i].set_title(titoli[i+2], fontsize = 14)
+		
 		ax2[i].set_ylabel(ylabel[i+2], fontsize = 14)
 		ax2[i].grid(True, linestyle = '--', alpha = 0.5, color = 'gray')
 		ax2[i].set_xscale('log')
