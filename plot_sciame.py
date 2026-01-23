@@ -39,7 +39,7 @@ def visualizza_profilo(E_min, E_max, ec_elettrone, ec_positrone, dE_X0, s, tipo,
 	fig, ax = plt.subplots(3,1, figsize = (12,9), sharex = True)
 	fig.suptitle( f"Profilo medio di {n} sciami a diversi valori di energia", fontsize=16)
 	
-	color = ['salmon', 'mediumseagreen', 'cornflowerblue']
+	color = ['cornflowerblue', 'mediumseagreen', 'salmon']
 	for i, e in enumerate(E0):
 		
 		risultati = an.profilo_medio(e, ec_elettrone, ec_positrone, dE_X0, s, tipo, n)
