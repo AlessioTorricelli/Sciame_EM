@@ -159,19 +159,17 @@ def singoli_materiali(Energie, risultati):
 		fig1.suptitle(fr'Frazione di $\mathbf{{E_0}}$ depositata e distanza raggiunta in "{materiale}"', fontweight='bold', fontsize=16)
 		fig2.suptitle(f'Numero massimo di particelle e posizione del massimo in "{materiale}"', fontweight='bold', fontsize=16)
 		
-		ax1[0].errorbar(Energie, risultati[materiale]['En']/Energie, risultati[materiale]['En_err']/Energie, fmt = '.', label = materiale ,color = risultati[materiale]['color'])
-		ax2[0].errorbar(Energie, risultati[materiale]['n_max'], risultati[materiale]['n_max_err'], fmt = '.', label = materiale, color = risultati[materiale]['color'])
-		ax1[1].errorbar(Energie, risultati[materiale]['dist_max'], risultati[materiale]['dist_max_err'], fmt = '.', label = materiale, color = risultati[materiale]['color'])
-		ax2[1].errorbar(Energie, risultati[materiale]['massimo'], risultati[materiale]['massimo_err'], fmt = '.', label = materiale, color = risultati[materiale]['color'])	
+		ax1[0].errorbar(Energie, risultati[materiale]['En']/Energie, risultati[materiale]['En_err']/Energie, fmt = '.' ,color = risultati[materiale]['color'])
+		ax2[0].errorbar(Energie, risultati[materiale]['n_max'], risultati[materiale]['n_max_err'], fmt = '.', color = risultati[materiale]['color'])
+		ax1[1].errorbar(Energie, risultati[materiale]['dist_max'], risultati[materiale]['dist_max_err'], fmt = '.', color = risultati[materiale]['color'])
+		ax2[1].errorbar(Energie, risultati[materiale]['massimo'], risultati[materiale]['massimo_err'], fmt = '.', color = risultati[materiale]['color'])	
 				
 		for i in range(2):
 				
-			ax1[i].legend(fontsize = 14)
 			ax1[i].set_ylabel(ylabel[i], fontsize = 14, labelpad = 20)
 			ax1[i].grid(True, linestyle = '--', alpha = 0.5, color = 'gray')
 			ax1[i].set_xscale('log')
 			
-			ax2[i].legend(fontsize = 14)
 			ax2[i].set_ylabel(ylabel[i+2], fontsize = 14, labelpad = 20)
 			ax2[i].grid(True, linestyle = '--', alpha = 0.5, color = 'gray')
 			ax2[i].set_xscale('log')
