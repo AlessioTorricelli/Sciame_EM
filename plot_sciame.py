@@ -92,9 +92,9 @@ def confronto_materiali(Energie, risultati):
 			None
 	"""
 	
-	titoli = ['Energia totale media depositata', 'Numero massimo medio di particelle',
-			  'Distanza massima media raggiunta', 'Posizione media del massimo']
-	ylabel = [r'$\overline{E}_{ion}$ [Mev]', r'$\overline{N}$',
+	titoli = ['Frazione di E0 depositata per ionizzazione', 'Numero massimo di particelle nello sciame',
+			  'Distanza massima raggiunta dallo sciame', 'Distanza alla quale si trova il massimo']
+	ylabel = [r'$\overline{E}_{ion}/E_0$ [Mev]', r'$\overline{N}$',
 			  r'$\overline{d}_{max}$ [cm]', r'$\overline{d}$ [cm]']	
 	
 	fig1, ax1 = plt.subplots(2,1, figsize  = (13, 8), sharex = True)
@@ -152,9 +152,9 @@ def singoli_materiali(Energie, risultati):
 			None
 	"""
 	
-	titoli = ['Energia totale media depositata per ionizzazione', 'Numero massimo di particelle nello sciame',
-			  'Distanza massima raggiunta dallo sciame', 'Distanza dove si trova il massimo']
-	ylabel = [r'$\overline{E}_{ion}$ [Mev]', r'$\overline{N}$',
+	titoli = ['Frazione di E0 depositata per ionizzazione', 'Numero massimo di particelle nello sciame',
+			  'Distanza massima raggiunta dallo sciame', 'Distanza alla quale si trova il massimo']
+	ylabel = [r'$\overline{E}_{ion}/E_0$ [Mev]', r'$\overline{N}$',
 			  r'$\overline{d}_{max}$ [cm]', r'$\overline{d} [cm]$']	
 	
 	for materiale in risultati:
