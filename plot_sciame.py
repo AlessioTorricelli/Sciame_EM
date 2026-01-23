@@ -1,11 +1,8 @@
 '''
 Modulo plot_sciame.py
 
-Contiene le funzioni per visualizzare i grafici del profilo longitudinale dello sciame e dei suoi parametri
-
-
+Contiene le funzioni per visualizzare i grafici del profilo longitudinale e dei parametri dello sciame.
 '''
-
 
 import numpy as np
 import analisi_sciame as an
@@ -14,21 +11,21 @@ import matplotlib.pyplot as plt
 def visualizza_profilo(E_min, E_max, ec_elettrone, ec_positrone, dE_X0, s, tipo, n):
 	
 	"""
-	Genera tre grafici in colonna riportando in funzione della distanza in unità di X0:
+	Genera tre grafici in colonna riportando in funzione della distanza (in unità di X0):
 	- Numero di particelle presenti ad ogni passo per 3 valori di enegia inizale
-	- Energia persa per ionizzazione an ogni passo per 3 valori di enegia inizale
-	- Energia cumulata persa per ionizzazione ad ogni passo per 3 valori di enegia inizale
-	I tre valori di energia sono E_min, E_max e il valore centrale tra questi due
+	- Energia persa per ionizzazione an ogni passo per 3 valori di enegia inizale [MeV]
+	- Energia cumulata persa per ionizzazione ad ogni passo per 3 valori di enegia inizale [MeV]
+	I tre valori di energia sono E_min, E_max e il valore centrale tra questi.
 	
 	Parametri:
-		E_min (float): valore minimo di energia per cui vengono eseguite le simulazioni [MeV]
-		E_max (float): valore massimo di energia per cui vengono eseguite le simulazioni [MeV]
-		ec_elettrone (float): energia critica per gli elettroni nel materiale in esame [MeV]
-		ec_positrone (float): energia critica per i positroni nel materiale in esame [MeV]
-		dE_X0 (float): perdita per ionizzazione in una lunghezza di radiazione [MeV/cm]
-		s (float): passo di avanzamento della simulazione in frazioni di X0 (s in (0, 1])
-		tipo (str): tipo della particella iniziale (elettrone, positrone, fotone)
-		n (int): numero di simulazioni da eseguire
+		E_min (float): Valore minimo di energia per cui vengono eseguite le simulazioni [MeV]
+		E_max (float): Valore massimo di energia per cui vengono eseguite le simulazioni [MeV]
+		ec_elettrone (float): Energia critica per gli elettroni nel materiale in esame [MeV]
+		ec_positrone (float): Energia critica per i positroni nel materiale in esame [MeV]
+		dE_X0 (float): Perdita per ionizzazione in una lunghezza di radiazione [MeV/cm]
+		s (float): Passo di avanzamento della simulazione in frazioni di X0 (s in (0, 1])
+		tipo (str): Tipo della particella iniziale (elettrone, positrone, fotone)
+		n (int): Numero di simulazioni da eseguire
 		
 	Ritorna:
 		None
@@ -80,17 +77,17 @@ def confronto_materiali(Energie, risultati):
 	-pannello2: Distanza massima media raggiunta e posizione media del massimo
 	
 	Parametri:
-		Energie (np.array): Energie usate per eseguire le simulazioni
+		Energie (np.array): Energie usate per eseguire le simulazioni [MeV]
 		risultati (dict): Ogni chiave è il nome del materiale (str) e il valore è un dict contenente:
-				-'En' (list): energia totale media depositata per ionizzazione per ogni valore di energia [MeV]
-				-'En_err' (list): errore standard dell'energia totale media depositata [MeV]
-				-'n_max' (list): numero massimo medio di particelle presenti nello sciame per ogi valore di energia
-				-'n_max_err' (list): errore standard del numero massimo medio di particelle
-				-'dist_max' (list): distanza massima raggiunta in media dallo sciame per ogni valore di energia [cm]
-				-'dist_max_err' (list): errore standard della distanza massima raggiunta
-				-'massimo' (list): distanza media alla quale si ha il numero massimo di particelle per ogni valore di energua [cm]
-				-'massimo_err' (list): errore standard della distanza media alla quale si ha il numero massimo di particelle
-				-'color' (str): nome del colore da utilizzare per rappresentare nei grafici il materiale
+				-'En' (list): Energia totale media depositata per ionizzazione per ogni valore di energia [MeV]
+				-'En_err' (list): Errore standard dell'energia totale media depositata [MeV]
+				-'n_max' (list): Numero massimo medio di particelle presenti nello sciame per ogi valore di energia
+				-'n_max_err' (list): Errore standard del numero massimo medio di particelle
+				-'dist_max' (list): Distanza massima raggiunta in media dallo sciame per ogni valore di energia [cm]
+				-'dist_max_err' (list): Errore standard della distanza massima raggiunta [cm]
+				-'massimo' (list): Distanza media alla quale si ha il numero massimo di particelle per ogni valore di energua [cm]
+				-'massimo_err' (list): Errore standard della distanza media alla quale si ha il numero massimo di particelle [cm]
+				-'color' (str): Colore da utilizzare per rappresentare nei grafici il materiale
 		Ritorna:
 			None
 	"""
@@ -140,17 +137,17 @@ def singoli_materiali(Energie, risultati):
 	Genera due pannelli per ogni materiale con due grafici ciascuno in funzione dell'enegia E0 della particella iniziale.
 	
 	Parametri:
-		Energie (np.array): Energie usate per eseguire le simulazioni
+		Energie (np.array): Energie usate per eseguire le simulazioni [MeV]
 		risultati (dict): Ogni chiave è il nome del materiale (str) e il valore è un dict contenente:
-				-'En' (list): energia totale media depositata per ionizzazione per ogni valore di energia [MeV]
-				-'En_err' (list): errore standard dell'energia totale media depositata [MeV]
-				-'n_max' (list): numero massimo medio di particelle presenti nello sciame per ogi valore di energia
-				-'n_max_err' (list): errore standard del numero massimo medio di particelle
-				-'dist_max' (list): distanza massima raggiunta in media dallo sciame per ogni valore di energia [cm]
-				-'dist_max_err' (list): errore standard della distanza massima raggiunta
-				-'massimo' (list): distanza media alla quale si ha il numero massimo di particelle per ogni valore di energua [cm]
-				-'massimo_err' (list): errore standard della distanza media alla quale si ha il numero massimo di particelle
-				-'color' (str): nome del colore da utilizzare per rappresentare nei grafici il materiale
+				-'En' (list): Energia totale media depositata per ionizzazione per ogni valore di energia [MeV]
+				-'En_err' (list): Errore standard dell'energia totale media depositata [MeV]
+				-'n_max' (list): Numero massimo medio di particelle presenti nello sciame per ogi valore di energia
+				-'n_max_err' (list): Errore standard del numero massimo medio di particelle
+				-'dist_max' (list): Distanza massima raggiunta in media dallo sciame per ogni valore di energia [cm]
+				-'dist_max_err' (list): Errore standard della distanza massima raggiunta [cm]
+				-'massimo' (list): Distanza media alla quale si ha il numero massimo di particelle per ogni valore di energua [cm]
+				-'massimo_err' (list): Errore standard della distanza media alla quale si ha il numero massimo di particelle [cm]
+				-'color' (str): Colore da utilizzare per rappresentare nei grafici il materiale
 		Ritorna:
 			None
 	"""
