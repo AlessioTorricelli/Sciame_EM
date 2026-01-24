@@ -35,8 +35,8 @@ parser.add_argument('--singoli', action = 'store_false', help = 'I grafici dei m
 args = parser.parse_args()
 
 #materiali = {'materiale': [ec_elettrone, ec_positrone, dE_X0, X0, color]}
-materiali = {'NaI': [13.37, 12.94, 4.785, 2.588, 'navy'],
-			 'Standard rock': [49.13, 47.74, 4.472, 10.02, 'green']
+materiali = {'NaI': [13.37, 12.94, 4.785 * 2.588, 2.588, 'navy'],
+			 'Standard rock': [49.13, 47.74, 4.472 * 10.02, 10.02, 'green']
 			 }
 
 Energie, risultati = an.sciame_stat(args.E0_min, args.E0_max, materiali, args.s, args.tipo, args.nE, args.n)
