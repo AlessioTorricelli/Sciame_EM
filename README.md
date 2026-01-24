@@ -35,8 +35,8 @@ Consente la visualizzazione grafica dei risultati tramite tre funzioni che produ
 #### 1. `run_profilo_sciame.py`
 Simula più volte lo sciame per tre valori di energia ($E_{min}$, $E_{max}$ e il valore medio) e calcola i valori medi di:
 * Numero di particelle presenti
-* Energia depositata per ionizzazione in ogni passo
-* Energia comulativa depositata
+* Energia depositata per ionizzazione in ogni passo [MeV]
+* Energia cumulativa depositata [MeV]
   
 Produce tre grafici in funzione della distanza (in unità di lunghezza di radiazione $X_0$) delle quantità riportate sopra.
 
@@ -63,10 +63,10 @@ python3 run_profilo_sciame.py 2500 10000 13.37 12.94 4.785 2.588 0.1 positrone 1
 Simula più volte uno sciame per valori di energia spaziati logaritmicamente nell'intervallo $(E_{min}, E_{max})$ e calcola i parametri medi. 
 Il processo viene ripetuto per i materiali presenti nel dizionario interno (attualmente 'NaI' e 'Standard rock', ma espandibile).    
 Produce grafici per i vari materiali (sovrapposti o separati) con i valori medi di:
-* Energia totale depositata per ionizzazione
-* Numero massimo di particelle
-* Distanza massima raggiunta
-* Posizione del massimo   
+* Energia totale depositata per ionizzazione [MeV]
+* Numero massimo di particelle 
+* Distanza massima raggiunta [cm]
+* Posizione del massimo [cm]     
 
 Tutti i grafici sono in funzione dell'energia della particella iniziale.
      
