@@ -31,7 +31,7 @@ parser.add_argument('n', type = int,  help = 'Numero di simulazioni eseguite per
 parser.add_argument('nE', type = int, help = "Numero di valori di energia nell'intervallo")
 parser.add_argument('s', type = float , help = 'Passo di avanzamento in frazioni di X0')
 parser.add_argument('tipo', type = str, help = 'Tipo di particella iniziale (elettrone, positrone fotone)')
-parser.add_argument('--singoli', action = 'store_false', help = 'I grafici dei materiali vengono visualizzati singolarmente, non sovrapposti')
+parser.add_argument('--singoli', action = 'store_true', help = 'I grafici dei materiali vengono visualizzati singolarmente, non sovrapposti')
 args = parser.parse_args()
 
 #materiali = {'materiale': [ec_elettrone, ec_positrone, dE_X0, X0, color]}
@@ -41,7 +41,7 @@ materiali = {'NaI': [13.37, 12.94, 4.785 * 2.588, 2.588, 'navy'],
 
 Energie, risultati = an.sciame_stat(args.E0_min, args.E0_max, materiali, args.s, args.tipo, args.nE, args.n)
 
-if args.singoli:
+if not args.singoli:
 	plot.confronto_materiali(Energie, risultati)
 
 else:
