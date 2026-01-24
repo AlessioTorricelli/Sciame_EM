@@ -82,6 +82,6 @@ Parametri richiesti da riga di comando:
 
 **Esempio di utilizzo:**
 ```
-python3 run_analisi_materiali.py 30 10000 10 100 0.1 positrone
+python3 run_analisi_materiali.py 30 10000 20 100 0.1 positrone
 ```    
   
