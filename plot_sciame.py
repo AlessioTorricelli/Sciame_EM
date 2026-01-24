@@ -8,7 +8,7 @@ import numpy as np
 import analisi_sciame as an
 import matplotlib.pyplot as plt
 
-def visualizza_profilo(E_min, E_max, ec_elettrone, ec_positrone, dE_X0, s, tipo, n):
+def visualizza_profilo(E_min, E_max, ec_elettrone, ec_positrone, dE_X0, s, tipo, n, X0):
 	
 	"""
 	Genera tre grafici in colonna riportando in funzione della distanza (in unità di X0):
@@ -26,6 +26,7 @@ def visualizza_profilo(E_min, E_max, ec_elettrone, ec_positrone, dE_X0, s, tipo,
 		s (float): Passo di avanzamento della simulazione in frazioni di X0 (s in (0, 1])
 		tipo (str): Tipo della particella iniziale (elettrone, positrone, fotone)
 		n (int): Numero di simulazioni da eseguire
+		X0 (float): Lunghezza di radiazione [cm]
 		
 	Ritorna:
 		None
@@ -42,7 +43,7 @@ def visualizza_profilo(E_min, E_max, ec_elettrone, ec_positrone, dE_X0, s, tipo,
 	color = ['cornflowerblue', 'mediumseagreen', 'salmon']
 	for i, e in enumerate(E0):
 		
-		risultati = an.profilo_medio(e, ec_elettrone, ec_positrone, dE_X0, s, tipo, n)
+		risultati = an.profilo_medio(e, ec_elettrone, ec_positrone, dE_X0, s, tipo, n, X0)
 		
 		ax[0].errorbar(risultati['distanza'], risultati['n_med'], risultati['n_err'], label = f'$E_0$ = {e:.0f} MeV', marker = '.', color = color[i])
 		ax[1].errorbar(risultati['distanza'], risultati['E_med'], risultati['E_err'], label = f'$E_0$ = {e:.0f} MeV', marker = '.', color = color[i])
