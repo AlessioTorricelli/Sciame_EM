@@ -55,7 +55,7 @@ def profilo_medio(E0, ec_elettrone, ec_positrone, dE_X0, s, tipo, n, X0):
 				mat_part[i][j] = n_particelle[i][j]
 
 	E_med = np.mean(mat_en, axis=0)
-	E_err = np.std(mat_en, ddof=1. axis=0)/np.sqrt(n)
+	E_err = np.std(mat_en, ddof=1, axis=0)/np.sqrt(n)
 	n_med = np.mean(mat_part, axis=0)
 	n_err = np.std(mat_part, ddof=1, axis=0)/np.sqrt(n)
 
