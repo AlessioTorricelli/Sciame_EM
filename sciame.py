@@ -33,7 +33,7 @@ class Particella:
 		else:
 			raise ValueError(f'La classe Particella non ammette "{tipo}" come tipo, inserire "elettrone" o "positrone".')
 	
-	def evoluzione(self, sciame, s, dE_X0, ec, E_ion):
+	def evoluzione(self, sciame, s, dE_X0, ec, E_ion, X0):
 		
 		"""
 		Simula la perdita di energia per ionizzazione e l'eventuale emissione di un fotone per Bremsstrahlung.
@@ -45,15 +45,16 @@ class Particella:
 		dE_X0 (float): Energia persa per ionizzazione in una lunghezza di radiazione [MeV/cm]
 		ec (float): Energia critica della particella [MeV]
 		E_ion (float): Energia depositata per ionizzazione nel passo corrente [MeV]
+		X0 (float): Lunghezza di radiazione [cm]
 		
 		Ritorna:
 		
 		E_ion (float): energia depositata aggiornata (dopo l'evoluzione) [MeV]
 		"""
 		
-		if self.E > dE_X0 * s:
-			self.E = self.E - dE_X0 * s
-			E_ion += dE_X0 * s
+		if self.E > dE_X0 * X0 * s:
+			self.E = self.E - dE_X0 * X0 * s
+			E_ion += dE_X0 * X0 * s
 		
 		if self.E > ec :
 			p = np.random.random()
@@ -84,7 +85,7 @@ class Particella:
 		E_ion += En
 		return E_ion
 		
-	def step(self, s, sciame, E_ion, ec_elettrone, ec_positrone, dE_X0):
+	def step(self, s, sciame, E_ion, ec_elettrone, ec_positrone, dE_X0, X0):
 		
 		"""
 		Simula un passo per una particella.
@@ -97,21 +98,22 @@ class Particella:
 		ec_elettrone (float): Energia critica per gli elettroni nel materiale considerato [MeV]
 		ec_positrone (float): Energia critica per i positroni nel materiale considerato [MeV]
 		dE_X0 (float): Energia persa per ionizzazione in una lunghezza di radiazione [MeV/cm]
+		X0 (float): Lunghezza di radiazione [cm]
 		
 		Ritorna:
 		
 		E_ion: energia totale depositata per ionizzazione nello step [MeV]
 		"""
 		
-		if self.E < dE_X0 * s:
+		if self.E < dE_X0 * X0 * s:
 			E_ion = self.esclusione(E_ion)
 	
 		else:
 			if self.tipo == 'elettrone':
-				E_ion = self.evoluzione(sciame, s, dE_X0, ec_elettrone, E_ion)
+				E_ion = self.evoluzione(sciame, s, dE_X0, ec_elettrone, E_ion, X0)
 		
 			else:
-				E_ion = self.evoluzione(sciame, s, dE_X0, ec_positrone, E_ion)
+				E_ion = self.evoluzione(sciame, s, dE_X0, ec_positrone, E_ion, X0)
 			
 		return E_ion
 		
@@ -179,7 +181,7 @@ class Fotone:
 		E_ion += En
 		return E_ion
 		
-	def step(self, s, sciame, E_ion, ec_elettrone = None, ec_positrone = None, dE_X0 = None):
+	def step(self, s, sciame, E_ion, ec_elettrone = None, ec_positrone = None, dE_X0 = None, X0 = None):
 	
 		"""
 		Simula un passo per un fotone.
@@ -189,10 +191,10 @@ class Fotone:
 		s (float): Passo di avanzamento della simulazione in frazioni di X0 (s in (0, 1])
 		sciame (list): Lista della particelle o fotoni presenti allo step successivo
 		E_ion (float): Energia depositata per ionizzazione prima che il fotone esegua lo step [MeV]
-		ec_elettrone (float, opzionale): Non utilizzato nella funzione, presente per compatibilità con la classe particella [MeV]
-		ec_positrone (float, opzionale): Non utilizzato nella funzione, presente per compatibilità con la classe particella [MeV]
-		dE_X0 (float, opzionale): Non utilizzato nella funzione, presente per compatibilità con la classe particella [MeV/cm]
-		
+		ec_elettrone (opzionale): Non utilizzato nella funzione, presente per compatibilità con la classe particella
+		ec_positrone (opzionale): Non utilizzato nella funzione, presente per compatibilità con la classe particella 
+		dE_X0 (opzionale): Non utilizzato nella funzione, presente per compatibilità con la classe particella 
+		X0 (opzionale): Non utilizzato nella funzione, presente per compatibilità con la classe particella
 		Ritorna:
 		
 		E_ion(float): Energia totale depositata per ionizzazione dopo lo step [MeV]
@@ -207,7 +209,7 @@ class Fotone:
 		return E_ion
 		
 
-def simulazione(E0, ec_elettrone, ec_positrone, dE_X0, s, tipo):
+def simulazione(E0, ec_elettrone, ec_positrone, dE_X0, s, tipo, X0):
 	
 	"""
 	Simula uno sciame elettromagnetico.
@@ -220,7 +222,7 @@ def simulazione(E0, ec_elettrone, ec_positrone, dE_X0, s, tipo):
 	dE_X0 (float): Perdita per ionizzazione in una lunghezza di radiazione [MeV/cm]
 	s (float): Passo di avanzamento della simulazione in frazioni di X0 (s in (0, 1]) 
 	tipo (str): Tipo della particella iniziale (elettrone, positrone, fotone) 
-	
+	X0 (float): Lunghezza di radiazione [cm]
 	Ritorna:
 	
 	E_step(list): Energia depositata per ionizzazione in ogni step [MeV]
@@ -236,6 +238,9 @@ def simulazione(E0, ec_elettrone, ec_positrone, dE_X0, s, tipo):
 	
 	if E0 < 0 or ec_positrone < 0 or ec_elettrone < 0 or dE_X0 < 0:
 		raise ValueError('Inserire valori di energia positivi')
+
+	if X0 < 0:
+		raise ValueError('La lunghezza di radiazione deve essere positiva')
 		
 	if s <= 0 or s > 1:
 		raise ValueError("Il passo 's' deve essere compreso nell'intervallo (0,1]")
@@ -257,7 +262,7 @@ def simulazione(E0, ec_elettrone, ec_positrone, dE_X0, s, tipo):
 		
 		for part in (sciame_i):
 			
-			E_ion = part.step(s, sciame_f, E_ion, ec_elettrone, ec_positrone, dE_X0)	
+			E_ion = part.step(s, sciame_f, E_ion, ec_elettrone, ec_positrone, dE_X0, X0)	
 		
 		E_step.append(E_ion)
 		
