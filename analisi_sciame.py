@@ -54,13 +54,13 @@ def profilo_medio(E0, ec_elettrone, ec_positrone, dE_X0, s, tipo, n):
 				mat_part[i][j] = n_particelle[i][j]
 
 	E_med = np.mean(mat_en, axis=0)
-	E_err = np.std(mat_en, axis=0)/np.sqrt(n)
+	E_err = np.std(mat_en, ddof=1. axis=0)/np.sqrt(n)
 	n_med = np.mean(mat_part, axis=0)
-	n_err = np.std(mat_part, axis=0)/np.sqrt(n)
+	n_err = np.std(mat_part, ddof=1, axis=0)/np.sqrt(n)
 
 	mat_en_cum = np.cumsum(mat_en, axis=1)
 	E_cum_med = np.mean(mat_en_cum, axis=0)
-	E_cum_err = np.std(mat_en_cum, axis=0) / np.sqrt(n)
+	E_cum_err = np.std(mat_en_cum, ddof=1, axis=0) / np.sqrt(n)
 		
 	distanza = [i * s for i in range(massimo)]
 		
@@ -160,12 +160,14 @@ def sciame_stat(E0_min, E0_max, materiali, s, tipo, nE, n):
 				
 			n_max.append(np.mean(n_max_simulazione))
 			n_max_err.append(np.std(n_max_simulazione, ddof = 1)/np.sqrt(n))
-				
-			dist_max.append(np.mean(n_passi) * s * materiali[materiale][3])
-			dist_max_err.append(np.std(n_passi, ddof = 1)/np.sqrt(n) * s * materiali[materiale][3])
-			
-			massimo.append(np.mean(indice_massimo) * s * materiali[materiale][3])
-			massimo_err.append(np.std(indice_massimo, ddof = 1)/np.sqrt(n) * s * materiali[materiale][3])
+
+			n_passi = n_passi * s * materiali[materiale][3]
+			dist_max.append(np.mean(n_passi))
+			dist_max_err.append(np.std(n_passi, ddof = 1)/np.sqrt(n))
+
+			indice_massimo = indice_massimo * s * materiali[materiale][3]
+			massimo.append(np.mean(indice_massimo))
+			massimo_err.append(np.std(indice_massimo, ddof = 1)/np.sqrt(n))
 			
 			
 		risultati[materiale] = {'En': En,
