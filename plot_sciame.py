@@ -38,14 +38,14 @@ def visualizza_profilo(E_min, E_max, ec_elettrone, ec_positrone, dE_X0, s, tipo,
 	E0 = np.linspace(E_min, E_max, 3)
 	
 	fig, ax = plt.subplots(3,1, figsize = (12,9), sharex = True)
-	fig.suptitle( f"Profilo medio di {n} sciami a diversi valori di energia", fontsize=16)
+	fig.suptitle( f"Profilo medio di {n} sciami a diversi valori di energia", fontweight='bold',  fontsize=16)
 	
 	color = ['cornflowerblue', 'mediumseagreen', 'salmon']
 	for i, e in enumerate(E0):
 		
 		risultati = an.profilo_medio(e, ec_elettrone, ec_positrone, dE_X0, s, tipo, n, X0)
 		
-		ax[0].errorbar(risultati['distanza'], risultati['n_med'], risultati['n_err'], label = f'$E_0$ = {e:.0f} MeV', marker = '.', color = color[i])
+		ax[0].errorbar(risultati['distanza'], risultati['n_med'], risultati['n_err'], label = f'{e:.0f} MeV', marker = '.', color = color[i])
 		ax[1].errorbar(risultati['distanza'], risultati['E_med'], risultati['E_err'], label = f'$E_0$ = {e:.0f} MeV', marker = '.', color = color[i])
 		ax[2].errorbar(risultati['distanza'], risultati['E_cum_med'], risultati['E_cum_err'], label = f'$E_0$ = {e:.0f} MeV', marker = '.', color = color[i])
 		
@@ -61,7 +61,8 @@ def visualizza_profilo(E_min, E_max, ec_elettrone, ec_positrone, dE_X0, s, tipo,
 		ax[i].set_title(titoli[i], fontsize = 14)
 		ax[i].grid(True, linestyle = '--', alpha = 0.5, color = 'gray')
 		ax[i].set_ylabel(y_label[i], fontsize = 14, labelpad = 20)
-		ax[i].legend(fontsize = 12, loc = 'upper left')
+
+	ax[0].legend(title =  'Energia iniziale:', title_fontweight = 'bold, 'fontsize = 10, loc = 'upper right')
 	
 	ax[2].set_xlabel(r'distanza [$X_0$]', fontsize = 14)
 	fig.subplots_adjust(hspace=0.4)	
