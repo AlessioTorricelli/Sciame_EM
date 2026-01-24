@@ -60,7 +60,7 @@ def visualizza_profilo(E_min, E_max, ec_elettrone, ec_positrone, dE_X0, s, tipo,
 	for i in range(3):
 		ax[i].set_title(titoli[i], fontsize = 14)
 		ax[i].grid(True, linestyle = '--', alpha = 0.5, color = 'gray')
-		ax[i].set_ylabel(y_label[i], fontsize = 14)
+		ax[i].set_ylabel(y_label[i], fontsize = 14, labelpad = 20)
 		ax[i].legend(fontsize = 12, loc = 'upper left')
 	
 	ax[2].set_xlabel(r'distanza [$X_0$]', fontsize = 14)
