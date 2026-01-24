@@ -54,7 +54,7 @@ Parametri richiesti da riga di comando:
 
 **Esempio di utilizzo:**
 ```
-python3 run_profilo_sciame.py 2500 10000 13.37 12.94 4.785 0.1 positrone 100
+python3 run_profilo_sciame.py 2500 10000 13.37 12.94 4.785 2.588 0.1 positrone 100
 ```
 
     
