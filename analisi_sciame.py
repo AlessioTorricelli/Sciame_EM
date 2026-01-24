@@ -50,7 +50,7 @@ def profilo_medio(E0, ec_elettrone, ec_positrone, dE_X0, s, tipo, n, X0):
 	mat_part = np.zeros((n, massimo))
 	for i in range(n):
 		for j in range(massimo):
-			if len(Energia[i]) > j:
+			#if len(Energia[i]) > j:
 				mat_en[i][j] = Energia[i][j]
 				mat_part[i][j] = n_particelle[i][j]
 
