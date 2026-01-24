@@ -28,10 +28,11 @@ parser.add_argument('E_max', type = float , help = 'Energia iniziale massima del
 parser.add_argument('ec_elettrone', type = float , help = 'Energia critica elettrone [MeV]')
 parser.add_argument('ec_positrone', type = float , help = 'Energia critica positrone [MeV]')
 parser.add_argument('dE_X0', type = float, help = 'Energia persa per ionizzazione in una lunghezza di radiazione [MeV]')
+parser.add_argument('X0', type = float, help = 'Lunghezza di radiazione [cm]')
 parser.add_argument('s', type = float , help = 'Passo di avanzamento in frazioni di X0 (s in (0,1])')
 parser.add_argument('tipo',type = str, help = 'Tipo di particella iniziale (elettrone, positrone, fotone)')
 parser.add_argument('n', type = int, help = 'Numero di simulazioni per ogni valore di energia')
 args = parser.parse_args()
 
-plot.visualizza_profilo(args.E_min, args.E_max, args.ec_elettrone, args.ec_positrone, args.dE_X0, args.s, args.tipo, args.n)
+plot.visualizza_profilo(args.E_min, args.E_max, args.ec_elettrone, args.ec_positrone, args.dE_X0, args.s, args.tipo, args.n, args.X0)
 
