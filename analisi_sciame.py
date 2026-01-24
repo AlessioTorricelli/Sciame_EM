@@ -7,7 +7,7 @@ Contiene le funzioni necessarie per analizzare l'andamento medio del profilo lon
 import numpy as np
 import sciame
 
-def profilo_medio(E0, ec_elettrone, ec_positrone, dE_X0, s, tipo, n):
+def profilo_medio(E0, ec_elettrone, ec_positrone, dE_X0, s, tipo, n, X0):
 	
 	"""
 	Simula uno sciame più volte e ne calcola i valori medi.
@@ -20,6 +20,7 @@ def profilo_medio(E0, ec_elettrone, ec_positrone, dE_X0, s, tipo, n):
 		s (float): Passo di avanzamento della simulazione in frazioni di X0 (s in (0, 1])
 		tipo (str): Tipo della particella iniziale (elettrone, positrone, fotone)
 		n (int): Numero di simulazioni da eseguire
+		X0 (float): Lunghezza di radiazione [cm]
 	
 	Ritorna:
 	risultati (dict): contiene
@@ -39,7 +40,7 @@ def profilo_medio(E0, ec_elettrone, ec_positrone, dE_X0, s, tipo, n):
 
 	for i in range(n):
 		
-		E_step, n_part, E_tot = sciame.simulazione(E0, ec_elettrone, ec_positrone, dE_X0, s, tipo)
+		E_step, n_part, E_tot = sciame.simulazione(E0, ec_elettrone, ec_positrone, dE_X0, s, tipo, X0)
 		
 		Energia.append(E_step)
 		n_particelle.append(n_part)
@@ -147,7 +148,7 @@ def sciame_stat(E0_min, E0_max, materiali, s, tipo, nE, n):
 				
 			for j in range(n):
 					
-				E_step, n_part, E_tot = sciame.simulazione(Energie[i], materiali[materiale][0], materiali[materiale][1], materiali[materiale][2] , s, tipo)
+				E_step, n_part, E_tot = sciame.simulazione(Energie[i], materiali[materiale][0], materiali[materiale][1], materiali[materiale][2] , s, tipo, materiali[materiale][3])
 
 				En_simulazione.append(E_tot)
 				n_max_simulazione.append(np.max(n_part))
