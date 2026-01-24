@@ -162,13 +162,11 @@ def sciame_stat(E0_min, E0_max, materiali, s, tipo, nE, n):
 			n_max.append(np.mean(n_max_simulazione))
 			n_max_err.append(np.std(n_max_simulazione, ddof = 1)/np.sqrt(n))
 
-			n_passi = n_passi * s * materiali[materiale][3]
-			dist_max.append(np.mean(n_passi))
-			dist_max_err.append(np.std(n_passi, ddof = 1)/np.sqrt(n))
-
-			indice_massimo = indice_massimo * s * materiali[materiale][3]
-			massimo.append(np.mean(indice_massimo))
-			massimo_err.append(np.std(indice_massimo, ddof = 1)/np.sqrt(n))
+			dist_max.append(np.mean(n_passi) * s * materiali[materiale][3])
+			dist_max_err.append((np.std(n_passi, ddof = 1)/np.sqrt(n)) * s * materiali[materiale][3])
+			
+			massimo.append(np.mean(indice_massimo) * s * materiali[materiale][3])
+			massimo_err.append((np.std(indice_massimo, ddof = 1)/np.sqrt(n)) * s * materiali[materiale][3])
 			
 			
 		risultati[materiale] = {'En': En,
