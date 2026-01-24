@@ -34,6 +34,9 @@ def visualizza_profilo(E_min, E_max, ec_elettrone, ec_positrone, dE_X0, s, tipo,
 	
 	if E_min < 0 or E_max < 0:
 		raise ValueError("L'energia minima e massima devono essere entrambe positive")
+
+	if E_min > E_max:
+		raise ValueError("Inserire 'E_min' < 'E_max'")
 	
 	E0 = np.linspace(E_min, E_max, 3)
 	
