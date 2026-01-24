@@ -46,7 +46,8 @@ Parametri richiesti da riga di comando:
 * Energia iniziale massima [MeV].
 * Energia critica per elettroni [MeV].
 * Energia critica per positroni [MeV].
-* Perdita per ionizzazione [MeV/X0].
+* Perdita per ionizzazione [MeV/cm].
+*  Lunghezza di radiazione [cm]
 * Passo di avanzamento in frazioni di X0 (s in (0,1])
 * Tipo di particella iniziale (elettrone, positrone, fotone).
 * Numero di simulazioni per ogni valore di energia.
