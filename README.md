@@ -37,6 +37,7 @@ Simula più volte lo sciame per tre valori di energia ($E_{min}$, $E_{max}$ e il
 * Numero di particelle presenti
 * Energia depositata per ionizzazione in ogni passo
 * Energia comulativa depositata
+  
 Produce tre grafici in funzione della distanza (in unità di lunghezza di radiazione $X_0$) delle quantità riportate sopra.
 
 
