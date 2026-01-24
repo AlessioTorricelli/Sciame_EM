@@ -234,7 +234,6 @@ def simulazione(E0, ec_elettrone, ec_positrone, dE_X0, s, tipo, X0):
 	sciame_f = []
 	n_part = [1]
 	E_step = [0]
-	n_steps = 0
 	
 	if E0 < 0 or ec_positrone < 0 or ec_elettrone < 0 or dE_X0 < 0:
 		raise ValueError('Inserire valori di energia positivi')
@@ -257,7 +256,6 @@ def simulazione(E0, ec_elettrone, ec_positrone, dE_X0, s, tipo, X0):
 	
 	while len(sciame_i) != 0:
 		
-		n_steps += 1
 		E_ion = 0
 		
 		for part in (sciame_i):
