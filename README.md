@@ -59,7 +59,7 @@ python3 run_profilo_sciame.py 2500 10000 13.37 12.94 4.785 2.588 0.1 positrone 1
 ```
 
     
-#### 2. `run_analisi_mateirali.py`
+#### 2. `run_analisi_materiali.py`
 Simula più volte uno sciame per valori di energia spaziati logaritmicamente nell'intervallo $(E_{min}, E_{max})$ e calcola i parametri medi. 
 Il processo viene ripetuto per i materiali presenti nel dizionario interno (attualmente 'NaI' e 'Standard rock', ma espandibile).    
 Produce grafici per i vari materiali (sovrapposti o separati) con i valori medi di:
